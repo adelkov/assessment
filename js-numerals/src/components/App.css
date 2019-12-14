@@ -28,12 +28,22 @@ form > * {
   margin: 1rem 2rem;
 }
 
+@media screen and (max-width: 992px) {
+  form {
+    width: 100vw;
+    margin-top: 2%;
+  }
+  .container {
+    align-items: flex-start;
+  }
+}
+
 .submitButton {
   cursor: pointer;
   padding: 1rem;
   border: 2px solid #8ab487;
   width: 90%;
-  font-size: 1rem;
+  font-size: .8rem;
 }
 
 .submitButton:hover {
@@ -43,7 +53,7 @@ form > * {
 }
 
 .numeralInput {
-  font-size: 1rem;
+  font-size: .8rem;
   outline: none;
   border: 2px solid rgba(0, 0, 0, 0.15);
   width: 90%;
@@ -53,6 +63,11 @@ form > * {
 
 .result {
   width: 90%;
+  font-size: 1rem;
+}
+
+.h3-header {
+  font-size: 1rem;
 }
 
 
