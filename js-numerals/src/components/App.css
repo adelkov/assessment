@@ -28,13 +28,15 @@ form > * {
   margin: 1rem 2rem;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 600px) {
   form {
     width: 100vw;
     margin-top: 2%;
+    box-shadow: none;
   }
   .container {
     align-items: flex-start;
+    background-color: white;
   }
 }
 
