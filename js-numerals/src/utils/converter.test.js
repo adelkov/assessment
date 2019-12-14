@@ -50,16 +50,14 @@ describe("Convert number to word", () => {
         expect(convertToWord(987000)).toBe('nine hundred eighty-seven thousand');
         expect(convertToWord(9000001)).toBe('nine million and one');
     });
-
     test('Negative number', () => {
         expect(convertToWord(-10)).toBe('negative ten');
         expect(convertToWord(-9000)).toBe('negative nine thousand');
     });
-    test('provided test cases', () => {
-        expect(convertToWord(7)).toBe('seven');
-        expect(convertToWord(42)).toBe('forty-two');
+    test('irregular four digit', () => {
         expect(convertToWord(2001)).toBe('two thousand and one');
         expect(convertToWord(1999)).toBe('nineteen hundred and ninety-nine');
-        // expect(convertToWord(17999)).toBe('seventeen thousand nine hundred and ninety-nine');
+        expect(convertToWord(1509)).toBe('fifteen hundred and nine');
+        expect(convertToWord(2500)).toBe('twenty-five hundred');
     })
 });
