@@ -2,28 +2,26 @@ import * as constants from './constants';
 
 
 const convertNumeralToWord = number => {
-    if (+number === 0) {
-        return 'zero'
-    }
+    if (+number === 0) return constants.TO_19[0];
 
-    let groups = getThreeDigitGroups(number);
     let word = '';
+    let groups = getThreeDigitGroups(number);
     groups.forEach((number, index) => {
+        let toAppend = '';
         if (+number !== 0) {
-            let toAppend = '';
             toAppend += convertThreeDigit(number);
             if (index !== 0) {
-                toAppend += ' ' + constants.DENOM[index] ;
+                toAppend += ' ' + constants.DENOM[index];
             }
             if (word !== '') {
-                toAppend += ' and ';
+                toAppend += ` ${constants.AND} `;
             }
-            word = toAppend + word;
         }
+        word = toAppend + word;
     });
 
     if (number < 0) {
-        word = 'negative ' + word;
+        word = `${constants.NEGATIVE} ${word}`;
     }
     return word.trim();
 };
@@ -43,37 +41,24 @@ const getThreeDigitGroups = number => {
 };
 
 const convertTwoDigit = number => {
-    if (+number === 0) {
-        return '';
-    }
-    if (number.toString().length === 1) {
-        return constants.TO_19[number];
-    }
-    if (number % 10 === 0) {
-        return constants.TENS[number / 10]
-    }
+    if (+number === 0) return '';
+    if (number.toString().length === 1) return constants.TO_19[number];
+    if (number % 10 === 0) return constants.TENS[number / 10];
 
     const ten = Math.floor(number / 10);
     const unit = number - ten * 10;
 
-    if (ten === 1) {
-        return constants.TO_19[number]
-    }
+    if (ten === 1) return constants.TO_19[number];
 
     return constants.TENS[ten] + '-' + constants.TO_19[unit]
-
 };
 
 
 const convertThreeDigit = number => {
-    let word = '';
-    if (number.toString().length === 1) {
-        return constants.TO_19[number]
-    }
-    if (number.toString().length === 2) {
-        return convertTwoDigit(number);
-    }
+    if (number.toString().length === 1) return constants.TO_19[number]
+    if (number.toString().length === 2) return convertTwoDigit(number);
 
+    let word = '';
     const hundred = Math.floor(number / 100);
     word += `${constants.TO_19[hundred]} ${constants.HUNDRED} `;
     word += convertTwoDigit(number - hundred * 100);

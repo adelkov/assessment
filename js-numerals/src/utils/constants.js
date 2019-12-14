@@ -58,3 +58,5 @@ export const DENOM = [
     "vigintillion"
 ];
 export const HUNDRED = "hundred";
+export const NEGATIVE = "negative";
+export const AND = "and";
