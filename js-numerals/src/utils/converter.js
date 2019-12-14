@@ -3,7 +3,9 @@ import * as constants from './constants';
 
 const convertNumeralToWord = number => {
     if (+number === 0) return constants.TO_19[0];
-
+    if (number.toString().length === 4 && Math.floor(number / 100) % 10 !== 0) {
+        return convertIrregularFourDigit(number);
+    }
     let word = '';
     let groups = getThreeDigitGroups(number);
     groups.forEach((number, index) => {
@@ -55,14 +57,30 @@ const convertTwoDigit = number => {
 
 
 const convertThreeDigit = number => {
-    if (number.toString().length === 1) return constants.TO_19[number]
-    if (number.toString().length === 2) return convertTwoDigit(number);
+    const numLength = number.toString().length;
+    if (numLength === 1) return constants.TO_19[number];
+    if (numLength === 2) return convertTwoDigit(number);
+
 
     let word = '';
     const hundred = Math.floor(number / 100);
+
+
     word += `${constants.TO_19[hundred]} ${constants.HUNDRED} `;
     word += convertTwoDigit(number - hundred * 100);
     return word;
+};
+
+const convertIrregularFourDigit = number => {
+    const hundred = Math.floor(number / 100);
+    let word = '';
+    word += convertTwoDigit(hundred) + " " + constants.HUNDRED;
+    const unit = number - hundred * 100;
+    if (unit) {
+        word += ` and ${convertTwoDigit(unit)} `;
+    }
+    return word.trim();
+
 };
 
 export default convertNumeralToWord;

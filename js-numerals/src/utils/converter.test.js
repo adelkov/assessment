@@ -15,6 +15,7 @@ describe("Convert number to word", () => {
     test('Two digit non zero', () => {
         expect(convertToWord(54)).toBe('fifty-four');
         expect(convertToWord(96)).toBe('ninety-six')
+        expect(convertToWord(33)).toBe('thirty-three')
     });
     test('Two digit with zero', () => {
         expect(convertToWord(20)).toBe('twenty');
@@ -28,24 +29,37 @@ describe("Convert number to word", () => {
         expect(convertToWord(100)).toBe('one hundred');
         expect(convertToWord(507)).toBe('five hundred seven')
     });
-    test('Larger than thousand no zero', () => {
-        expect(convertToWord(9876)).toBe('nine thousand and eight hundred seventy-six');
-        expect(convertToWord(1111)).toBe('one thousand and one hundred eleven')
+    test('Four digit no zero', () => {
+        expect(convertToWord(9876)).toBe('ninety-eight hundred and seventy-six');
+        expect(convertToWord(1111)).toBe('eleven hundred and eleven')
     });
-    test('Larger than thousand with zero', () => {
+    test('Four digit with zero', () => {
         expect(convertToWord(1000)).toBe('one thousand');
         expect(convertToWord(1010)).toBe('one thousand and ten');
-        expect(convertToWord(9300)).toBe('nine thousand and three hundred');
-        expect(convertToWord(9000001)).toBe('nine million and one');
-        expect(convertToWord(987000)).toBe('nine hundred eighty-seven thousand');
+        expect(convertToWord(9300)).toBe('ninety-three hundred');
     });
-    test('Extemely large number', () => {
+    test('Large number', () => {
         expect(convertToWord(9000000000000)).toBe('nine trillion');
         expect(convertToWord(9000000000009)).toBe('nine trillion and nine');
+        expect(convertToWord(1001000000)).toBe('one billion and one million');
+        expect(convertToWord(1001000001)).toBe('one billion and one million and one');
+        expect(convertToWord(1001000001001)).toBe('one trillion and one billion and one thousand and one');
+        expect(convertToWord(9009000009033)).toBe('nine trillion and nine billion and nine thousand and thirty-three');
+        expect(convertToWord(9119000009033)).toBe('nine trillion and one hundred nineteen billion and nine thousand and thirty-three');
+        expect(convertToWord(999999999999999)).toBe('nine hundred ninety-nine trillion and nine hundred ninety-nine billion and nine hundred ninety-nine million and nine hundred ninety-nine thousand and nine hundred ninety-nine');
+        expect(convertToWord(987000)).toBe('nine hundred eighty-seven thousand');
+        expect(convertToWord(9000001)).toBe('nine million and one');
     });
+
     test('Negative number', () => {
         expect(convertToWord(-10)).toBe('negative ten');
         expect(convertToWord(-9000)).toBe('negative nine thousand');
     });
+    test('provided test cases', () => {
+        expect(convertToWord(7)).toBe('seven');
+        expect(convertToWord(42)).toBe('forty-two');
+        expect(convertToWord(2001)).toBe('two thousand and one');
+        expect(convertToWord(1999)).toBe('nineteen hundred and ninety-nine');
+        // expect(convertToWord(17999)).toBe('seventeen thousand nine hundred and ninety-nine');
+    })
 });
-
