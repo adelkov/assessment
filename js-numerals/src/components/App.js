@@ -6,7 +6,7 @@ import convertNumeral from '../utils/converter'
 function App() {
 
     const [numeral, setNumeral] = useState('');
-    const [resultWord, setResultWord] = useState();
+    const [resultWord, setResultWord] = useState('');
 
     const onSubmit = e => {
         e.preventDefault();
@@ -17,13 +17,13 @@ function App() {
         setNumeral('')
     };
 
-
     return (
         <div className="container">
             <form onSubmit={onSubmit}>
                 <h3 className='h3-header'>Convert Numeral to Words</h3>
                 <input
                     step="1"
+                    max="999999999999999"
                     placeholder="Insert number"
                     onChange={(e) => setNumeral(e.target.value)}
                     value={numeral}
