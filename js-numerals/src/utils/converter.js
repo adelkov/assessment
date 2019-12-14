@@ -1,3 +1,5 @@
+import * as constants from './constants';
+
 
 const convertNumeralToWord = number => {
 
