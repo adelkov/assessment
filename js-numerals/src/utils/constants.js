@@ -23,6 +23,7 @@ export const TO_19 = [
 
 export const TENS = [
     "",
+    "ten",
     "twenty",
     "thirty",
     "forty",
