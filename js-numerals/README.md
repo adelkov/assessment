@@ -1,6 +1,6 @@
 # JavaScript/Front-end Developer - Exercise 1 - Solution
 
-Live demo available at [numeral-converter-app](doc:numeral-converter-adel.surge.sh).
+Live demo available at http://numeral-converter-adel.surge.sh/.
 
 ## Exercise description
 
