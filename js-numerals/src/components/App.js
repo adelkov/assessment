@@ -10,9 +10,6 @@ function App() {
 
     const onSubmit = e => {
         e.preventDefault();
-        if (!Number.isInteger(numeral)) {
-            setResultWord("Enter whole number")
-        }
         setResultWord(convertNumeral(numeral));
         setNumeral('')
     };
@@ -22,6 +19,7 @@ function App() {
             <form onSubmit={onSubmit}>
                 <h3 className='h3-header'>Convert Numeral to Words</h3>
                 <input
+                    required
                     step="1"
                     max="999999999999999"
                     placeholder="Insert number"
