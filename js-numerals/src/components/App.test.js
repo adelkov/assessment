@@ -55,7 +55,7 @@ describe("App form component", () => {
         });
 
         const result = container.getElementsByClassName('result')[0];
-        expect(result.innerHTML).toBe("Please enter a numeral to be converted.");
+        expect(result.innerHTML).toBe('');
         expect(input.value).toBe(undefined)
     });
 });

@@ -2,7 +2,6 @@ import * as constants from './constants';
 import {getDigitAtDenom, length} from './utils'
 
 const convertNumeralToWord = number => {
-    if (number === '') return "Please enter a numeral to be converted.";
     if (number === 0) return constants.TO_19[0];
 
     if (isFourDigitAndIrregular(number)) {
