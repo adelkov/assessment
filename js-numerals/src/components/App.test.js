@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {act, findRenderedDOMComponentWithClass} from "react-dom/test-utils";
+import {act} from "react-dom/test-utils";
 
 import App from './App';
 
@@ -40,28 +40,22 @@ describe("App form component", () => {
     });
 
 
-    test("displays result and clears input on submission", async () => {
+    test("Information displayed when no number is given", async () => {
         await act(async () => {
             ReactDOM.render(<App/>, container);
         });
 
-        const input = container.getElementsByClassName("numeralInput")[0];
-        expect(input.value).toBe('');
+        const input = container.getElementsByClassName("numeralInput");
+        expect(input.value).toBe(undefined);
 
-        await act(async () => {
-            input.value = 1;
-        });
-
-        const submitButton = container.getElementsByClassName('submitButton')[0];
-
+        const submitButton = container.getElementsByTagName('button')[0];
 
         await act(async () => {
             submitButton.dispatchEvent(new MouseEvent("click"));
         });
-        const result2 = container.getElementsByClassName('result')[0];
 
-        expect(input.value).toBe('')
+        const result = container.getElementsByClassName('result')[0];
+        expect(result.innerHTML).toBe("Please enter a numeral to be converted.");
+        expect(input.value).toBe(undefined)
     });
-
-
 });
