@@ -15,9 +15,9 @@ describe("Update field", () => {
         })
         test('Set multiple fields', () => {
             let resultData = {...sampleUsers};
-            resultData[1][0]['loading'] = false;
+            resultData[1][0]['first_name'] = 'alma';
             resultData[1][0]['status'] = 'locked';
-            expect(updateUsers(sampleUsers, 1, 576, {'loading': false, 'status': 'locked'})).toStrictEqual(resultData);
+            expect(updateUsers(sampleUsers, 1, 576, {first_name: 'alma', status: 'locked'})).toStrictEqual(resultData);
         })
     }
 );

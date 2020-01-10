@@ -1,59 +1,104 @@
 import React, {useEffect, useState} from "react";
 import * as API from '../util/API'
-import {parsePages, updateUsers} from "../util/data";
+import {parsePages, updateUsers, oppositeStatus} from "../util/data";
 
-const defaultUserContext = {
-    users: [],
-    loading: true,
-    error: null,
-};
-
-export const UsersContext = React.createContext(defaultUserContext);
+export const UsersContext = React.createContext({});
 
 export const UsersProvider = (props) => {
 
-    const [users, setUsers] = useState({});
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [users, setUsers] = useState({
+        data: null,
+        error: null,
+        loading: true
+    });
+
+    const [editState, setEditState] = useState({
+        loading: false,
+        error: null,
+        success: null
+    });
+
+    const [addState, setAddState] = useState({
+        loading: false,
+        error: null,
+        success: null
+    });
 
     useEffect(() => {
         const fetchUsers = async () => {
-            setLoading(true);
             try {
                 const {data} = await API.fetchUsers();
-                setUsers(parsePages(data));
+                setUsers({...users, data: parsePages(data), loading: false});
             } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
+                setUsers({...users, error: error.message})
             }
         };
         fetchUsers();
-    }, []);
+    }, [editState.success, addState.success]);
 
     const toggleStatus = async (userId, userStatus, page) => {
-        setUsers(updateUsers(users, page, userId, {'loading': true}));
+        setUsers({...users, data: updateUsers(users.data, page, userId, {'loading': true})});
         try {
-            await API.toggleStatus(userId, userStatus === 'active' ? 'locked' : 'active');
-            setUsers(updateUsers(users, page, userId, {
-                'loading': false,
-                'status': userStatus === 'active' ? 'locked' : 'active'
-            }))
+            await API.toggleStatus(userId, oppositeStatus(userStatus));
+            setUsers({
+                ...users, data: updateUsers(users.data, page, userId, {
+                    'loading': false,
+                    'status': oppositeStatus(userStatus)
+                })
+            })
         } catch (e) {
-            setUsers(updateUsers(users, page, userId, {'loading': false, error: e.message}))
+            setUsers({...users, data: updateUsers(users.data, page, userId, {'loading': false, error: e.message})})
         }
+    };
+
+    const addUser = async user => {
+        setAddState({...addState, loading: true});
+        try {
+            await API.addUser({...user, status: 'active'});
+            setAddState({...addState, error: null, success: true, loading: false});
+        } catch (e) {
+            setAddState({...addState, error: e.response.data});
+        }
+    };
+
+    const save = async (page, user) => {
+        setEditState({...editState, loading: true});
+        try {
+            await API.updateUser(user);
+            setEditState({...editState, loading: false, success: true})
+        } catch (e) {
+            setEditState({...editState, error: e.message, loading: false});
+        }
+    };
+
+    const getUser = (userId, page) => users.data[page].find(user => user.id === +userId)
+
+    const resetEdit = () => {
+        setEditState({
+            loading: false,
+            error: null,
+            success: null
+        })
+    };
+
+    const resetAdd = () => {
+        setAddState({
+            loading: false,
+            error: null,
+            success: null
+        })
     };
 
     return (
         <UsersContext.Provider
-            value={{users, loading, error, toggleStatus}}
+            value={{
+                list: {toggleStatus, getUser, ...users},
+                add: {addUser, ...addState, reset: resetAdd},
+                edit: {save, ...editState, reset: resetEdit}
+            }}
         >
             {props.children}
         </UsersContext.Provider>
     );
 };
-
-
-
-
 

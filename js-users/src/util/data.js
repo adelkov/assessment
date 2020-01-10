@@ -35,3 +35,5 @@ export const updateUsers = (users, page, userId, updateObject) => {
         })
     }
 };
+
+export const oppositeStatus = status => status === 'active' ? "locked" : 'active';

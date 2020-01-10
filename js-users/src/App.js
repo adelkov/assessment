@@ -6,22 +6,34 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-import Users from "./views/Users";
+import Users from "./views/Users/Users";
 import {UsersProvider} from "./Providers/UsersProvider";
+import AddUser from "./views/AddUser/AddUser";
+import EditUser from "./views/EditUser/EditUser";
+import Navigation from "./views/Navigation/Navigation";
 
 
 function App() {
     return (
-        <UsersProvider>
-            <Router>
+        <Router>
+            <UsersProvider>
+                <Navigation/>
                 <Switch>
+
                     <Route path="/users">
                         <Users/>
                     </Route>
-                    <Redirect from={'/'} to={'/users/1'} />
+                    <Route path="/new">
+                        <AddUser/>
+                    </Route>
+                    <Route path="/edit">
+                        <EditUser/>
+                    </Route>
+                    <Redirect from={'/'} to={'/users/1'}/>
                 </Switch>
-            </Router>
-        </UsersProvider>
+            </UsersProvider>
+        </Router>
+
     );
 }
 
