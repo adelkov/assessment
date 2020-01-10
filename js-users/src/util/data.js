@@ -18,3 +18,20 @@ export const formatDate = timestamp => {
     const date = new Date(timestamp);
     return `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getFullYear()}`
 };
+
+
+export const updateUsers = (users, page, userId, updateObject) => {
+    return {
+        ...users,
+        [page]: users[page].map(user => {
+            if (user.id === userId) {
+                Object.keys(updateObject).forEach(field => {
+                    user[field] = updateObject[field]
+                });
+                return user
+            } else {
+                return user
+            }
+        })
+    }
+};
