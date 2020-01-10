@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import * as API from '../util/API'
-import {parsePages} from "../util/data";
+import {parsePages, updateUsers} from "../util/data";
 
 const defaultUserContext = {
     users: [],
@@ -31,15 +31,28 @@ export const UsersProvider = (props) => {
         fetchUsers();
     }, []);
 
+    const toggleStatus = async (userId, userStatus, page) => {
+        setUsers(updateUsers(users, page, userId, {'loading': true}));
+        try {
+            await API.toggleStatus(userId, userStatus === 'active' ? 'locked' : 'active');
+            setUsers(updateUsers(users, page, userId, {
+                'loading': false,
+                'status': userStatus === 'active' ? 'locked' : 'active'
+            }))
+        } catch (e) {
+            setUsers(updateUsers(users, page, userId, {'loading': false, error: e.message}))
+        }
+    };
 
     return (
         <UsersContext.Provider
-            value={{users, loading, error}}
+            value={{users, loading, error, toggleStatus}}
         >
             {props.children}
         </UsersContext.Provider>
     );
 };
+
 
 
 
