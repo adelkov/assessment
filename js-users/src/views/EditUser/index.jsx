@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useParams} from "react-router-dom";
 import * as API from '../../util/API'
 import UserForm from "../../components/UserForm";
+import {NotificationContext} from "../../Providers/Notification";
 
 const Index = () => {
     const {userId} = useParams();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const {setNotification} = useContext(NotificationContext);
 
 
     useEffect(() => {
@@ -29,7 +31,9 @@ const Index = () => {
         try {
             await API.updateUser({...user, id: userId});
             setUser(user);
-            setLoading(false)
+            setLoading(false);
+            setNotification('saved')
+
         } catch (e) {
             setError(e.response.data);
             setLoading(false)
