@@ -20,3 +20,6 @@ export const updateUser = user => {
     return instance
         .put(`${BASE_URL}users/${id}.json`, {...fields});
 };
+
+export const fetchUser = userId => instance
+    .get(`${BASE_URL}users/${userId}.json`);

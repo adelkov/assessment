@@ -6,34 +6,29 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-import Users from "./views/Users/Users";
-import {UsersProvider} from "./Providers/UsersProvider";
-import AddUser from "./views/AddUser/AddUser";
-import EditUser from "./views/EditUser/EditUser";
+import Users from "./views/Users";
+import Add from "./views/AddUser";
 import Navigation from "./views/Navigation/Navigation";
+import Edit from "./views/EditUser";
 
 
 function App() {
     return (
         <Router>
-            <UsersProvider>
-                <Navigation/>
-                <Switch>
-
-                    <Route path="/users">
-                        <Users/>
-                    </Route>
-                    <Route path="/new">
-                        <AddUser/>
-                    </Route>
-                    <Route path="/edit">
-                        <EditUser/>
-                    </Route>
-                    <Redirect from={'/'} to={'/users/1'}/>
-                </Switch>
-            </UsersProvider>
+            <Navigation/>
+            <Switch>
+                <Route path={`/users/:page`}>
+                   <Users />
+                </Route>
+                <Route path="/new">
+                    <Add/>
+                </Route>
+                <Route path="/edit/:userId">
+                    <Edit />
+                </Route>
+                <Redirect from={'/'} to={'/users/1'}/>
+            </Switch>
         </Router>
-
     );
 }
 

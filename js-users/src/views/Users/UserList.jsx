@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-import {UsersContext} from "../../Providers/UsersProvider";
+import React from 'react';
 import {
     Link,
     useParams
@@ -8,9 +7,8 @@ import {formatDate} from "../../util/data";
 
 const displayActivate = status => status === 'active' ? 'LOCK' : 'ACTIVATE';
 
-const UserList = () => {
+const UserList = ({users, error, loading, toggleStatus}) => {
     let {page} = useParams();
-    let {list: {data, loading, error, toggleStatus}} = useContext(UsersContext);
 
     if (loading) {
         return (
@@ -26,7 +24,7 @@ const UserList = () => {
     return (
         <table>
             <tbody>
-            {data[page].map(user => (
+            {users[page].map(user => (
                 <tr key={user.id} className={`user--${user.status}`}>
                     <td>{user['last_name']}</td>
                     <td>{user["first_name"]}</td>
@@ -35,7 +33,7 @@ const UserList = () => {
                         {user.loading ? 'loading...' : displayActivate(user.status)}
                     </td>
                     {user.error && <td>{user.error}</td>}
-                    <td><Link to={`/edit/${page}/${user.id}`}>Edit</Link></td>
+                    <td><Link to={`/edit/${user.id}`}>Edit</Link></td>
                 </tr>
             ))}
             </tbody>

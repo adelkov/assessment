@@ -1,23 +1,16 @@
-import React, {useContext} from 'react';
-import {UsersContext} from "../../Providers/UsersProvider";
+import React from 'react';
 import {
     Link,
     useParams
 } from "react-router-dom";
 
-const Pagination = () => {
+const Pagination = ({totalPages}) => {
     let {page} = useParams();
-    let {list: {data, loading}} = useContext(UsersContext);
-    if (loading) {
-        return (
-            <div>Loading...</div>
-        )
-    }
     return (
         <div>
             {page > 0 && <Link to={`${+page - 1}`}>Back</Link>}
             {page}
-            {data.totalPages > page && <Link to={`${+page + 1}`}>Forth</Link>}
+            {totalPages > page && <Link to={`${+page + 1}`}>Forth</Link>}
         </div>
     )
 };
