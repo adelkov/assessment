@@ -1,0 +1,23 @@
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(15rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+
+@keyframes dots {
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

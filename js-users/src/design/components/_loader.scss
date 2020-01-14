@@ -1,0 +1,33 @@
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border: (10px / 5) solid $color-primary-dark;
+  border-radius: 50%;
+  float: left;
+  margin: 0 (10px / 2);
+  transform: scale(0);
+  animation: dots 1000ms ease infinite 0ms;
+  &:nth-child(2) {
+    animation: dots 1000ms ease infinite 1000ms * 0.3;
+  }
+  &:nth-child(3) {
+    animation: dots 1000ms ease infinite 1000ms * 0.6;
+  }
+}
+
+

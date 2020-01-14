@@ -32,7 +32,7 @@ const Index = () => {
             await API.updateUser({...user, id: userId});
             setUser(user);
             setLoading(false);
-            setNotification('saved')
+            setNotification('Saved')
 
         } catch (e) {
             setError(e.response.data);
@@ -41,9 +41,7 @@ const Index = () => {
     };
 
     return (
-        <div>Edit User
-            {loading ? <div>...loading</div> : <UserForm save={save} error={error} user={user}/>}
-        </div>
+        <UserForm save={save} loading={loading} error={error} user={user} title={'Edit user'}/>
     )
 };
 

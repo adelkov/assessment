@@ -14,7 +14,7 @@ const Index = () => {
         try {
             await API.addUser({...user, status: 'active'});
             setLoading(false);
-            setNotification('Successfully added user')
+            setNotification('Added')
         } catch (e) {
             setError(e.response.data);
             setLoading(false)
@@ -22,9 +22,7 @@ const Index = () => {
     };
 
     return (
-        <div>Add User
-            {loading ? <div>...loading</div> : <UserForm save={save} error={error}/>}
-        </div>
+        <UserForm loading={loading} save={save} error={error} title={'Add user'}/>
     );
 };
 

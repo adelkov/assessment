@@ -3,6 +3,7 @@ import UserList from './UserList';
 import Pagination from "./Pagination";
 import * as API from "../../util/API";
 import {oppositeStatus, parsePages, updateUsers} from "../../util/data";
+import Loader from "../../components/Loader";
 
 const Index = () => {
     const [users, setUsers] = useState(null);
@@ -33,10 +34,24 @@ const Index = () => {
             setUsers(updateUsers(users, page, userId, {loading: false, error: e.message}))
         }
     };
+
+    if (loading) {
+        return (
+            <Loader/>
+        )
+    }
+
+    if (error) {
+        return (
+            <div>Error</div>
+        )
+    }
+
     return (
-        <div>Users
-            <UserList users={users} loading={loading} errors={error} toggleStatus={toggleStatus}/>
-            {loading || <Pagination totalPages={users}/>}
+        <div className={'user-list'}>
+            <h2 className={'heading-secondary'}>Users</h2>
+            <UserList users={users} toggleStatus={toggleStatus}/>
+            <Pagination totalPages={users.totalPages}/>
         </div>
     )
 };

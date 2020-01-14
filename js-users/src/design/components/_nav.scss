@@ -1,0 +1,47 @@
+.nav {
+  z-index: 10;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include respond(phone) {
+    bottom: 0;
+    left: 0;
+    top: auto;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  &__btn {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
+    color: $color-grey-dark-3;
+    transition: all .3s;
+
+    &:hover {
+      box-shadow: none;
+      font-size: 2rem;
+    }
+
+    &--notification {
+      background-color: #8ab487;
+      color: $color-white;
+      animation: moveInBottom 1s ;
+    }
+
+    @include respond(phone) {
+      border-radius: 0;
+      margin: 2rem;
+    }
+  }
+}

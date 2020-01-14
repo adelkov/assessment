@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import TextInput from "./TextInput";
 
-const UserForm = ({user, save, error}) => {
+const UserForm = ({user, save, error, title, loading}) => {
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
+
 
     useEffect(() => {
         if (user) {
@@ -20,21 +22,26 @@ const UserForm = ({user, save, error}) => {
     };
 
     return (
-        <form onSubmit={onSave}>
-            <input
-                placeholder={'Last name'}
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-            />
-            <span>{error && error['last_name']}</span>
-            <input
-                placeholder={'First name'}
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-            />
-            <span>{error && error['first_name']}</span>
-            <button type={'submit'}>Save</button>
-        </form>
+        <div className={'user-form'}>
+            <form onSubmit={onSave} className={'user-form__form'}>
+                <h2 className={'heading-secondary'}>{title}</h2>
+                <TextInput
+                    error={error}
+                    name={'first_name'}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
+                />
+                <TextInput
+                    error={error}
+                    name={'last_name'}
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName}
+                />
+                <div className={'form__group'}>
+                    <button className={'btn btn--green'} type={'submit'}>{loading ? 'loading' : 'Save'}</button>
+                </div>
+            </form>
+        </div>
     )
 };
 
