@@ -20,7 +20,7 @@ const Navigation = () => {
                     <FontAwesomeIcon icon={faList}/>
                 </div>
             </NavLink>
-            {message && <div className={'nav__btn nav__btn--notification '}>{message}</div>}
+            {message && <div className={'nav__btn nav__btn--notification'} data-testid={'notification'}>{message}</div>}
         </div>
     )
 };
