@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {useParams} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import * as API from '../../util/API'
 import UserForm from "../../components/UserForm";
 import {NotificationContext} from "../../Providers/Notification";
@@ -10,7 +10,7 @@ const Index = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const {setNotification} = useContext(NotificationContext);
-
+    const history = useHistory();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -19,12 +19,11 @@ const Index = () => {
                 setUser(data);
                 setLoading(false)
             } catch (error) {
-                setError(error);
-                setLoading(false)
+                history.push('/users/1');
             }
         };
         fetchUser()
-    }, [userId]);
+    }, [userId, history]);
 
     const save = async (user) => {
         setLoading(true);
@@ -33,7 +32,6 @@ const Index = () => {
             setUser(user);
             setLoading(false);
             setNotification('Saved')
-
         } catch (e) {
             setError(e.response.data);
             setLoading(false)
