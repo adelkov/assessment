@@ -2,24 +2,21 @@ import axios from 'axios';
 
 const BASE_URL = 'http://js-assessment-backend.herokuapp.com/';
 
-const instance = axios.create({
-    baseURL: BASE_URL
-});
 
-export const fetchUsers = () => instance
+export const fetchUsers = () => axios
     .get(BASE_URL + 'users.json');
 
-export const toggleStatus = (userId, status) => instance
+export const toggleStatus = (userId, status) => axios
     .put(`${BASE_URL}users/${userId}.json`, {status});
 
-export const addUser = user => instance
+export const addUser = user => axios
     .post(`${BASE_URL}users.json`, user);
 
 export const updateUser = user => {
     const {id, ...fields} = user;
-    return instance
+    return axios
         .put(`${BASE_URL}users/${id}.json`, {...fields});
 };
 
-export const fetchUser = userId => instance
+export const fetchUser = userId => axios
     .get(`${BASE_URL}users/${userId}.json`);

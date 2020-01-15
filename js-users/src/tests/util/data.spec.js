@@ -1,5 +1,5 @@
-import {updateUsers} from "../util/data";
-import {sampleUsers} from "./input";
+import {updateUsers, oppositeStatus, formatDate} from "../../util/data";
+import {sampleUsers} from "../sample/pages";
 
 
 describe("Update field", () => {
@@ -21,4 +21,26 @@ describe("Update field", () => {
         })
     }
 );
+
+
+describe("Opposite status", () => {
+        test('Opposite of locked', () => {
+            expect(oppositeStatus('active')).toStrictEqual('locked');
+        });
+        test('Opposite of active', () => {
+            expect(oppositeStatus('locked')).toStrictEqual('active');
+        });
+
+    }
+);
+
+
+describe("Format date", () => {
+        test('Simple date', () => {
+            expect(formatDate(1579004591)).toStrictEqual('19/1/1970');
+        });
+
+    }
+);
+
 

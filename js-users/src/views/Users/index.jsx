@@ -43,7 +43,7 @@ const Index = () => {
 
     if (error) {
         return (
-            <div>Error</div>
+            <div data-testid={'error'}>Error: {error}</div>
         )
     }
 

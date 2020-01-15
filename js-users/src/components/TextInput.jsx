@@ -5,6 +5,7 @@ const TextInput = ({name, error, value, onChange}) => {
         <div className={'form__group'}>
             {error && error[name] && <label htmlFor={name}>{error[name]}</label>}
             <input
+                data-testid={name}
                 className={`form__input ${error && error[name] && 'form__input--invalid'}`}
                 id={name}
                 placeholder={displayName(name)}
@@ -13,7 +14,7 @@ const TextInput = ({name, error, value, onChange}) => {
             />
             <label
                 className={'form__label'}
-                htmlFor={name}>{error && error[name] ? error[name] : displayName(name)}</label>
+                htmlFor={name}>{displayName(name)}</label>
         </div>
     )
 };

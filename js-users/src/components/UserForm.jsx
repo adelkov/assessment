@@ -5,7 +5,6 @@ const UserForm = ({user, save, error, title, loading}) => {
     const [lastName, setLastName] = useState('');
     const [firstName, setFirstName] = useState('');
 
-
     useEffect(() => {
         if (user) {
             setLastName(user.last_name);
@@ -38,7 +37,11 @@ const UserForm = ({user, save, error, title, loading}) => {
                     value={lastName}
                 />
                 <div className={'form__group'}>
-                    <button className={'btn btn--green'} type={'submit'}>{loading ? 'loading' : 'Save'}</button>
+                    <button
+                        className={'btn btn--green'}
+                        type={'submit'}>
+                        {loading ? 'loading' : 'Save'}
+                    </button>
                 </div>
             </form>
         </div>

@@ -8,7 +8,7 @@ const Pagination = ({totalPages}) => {
     let {page} = useParams();
     page = +page;
     return (
-        <div className={'pagination'}>
+        <div className={'pagination'} data-testid={page}>
             {page > 1 ? <Link to={`${+page - 1}`} className={'btn btn--green'}>&lt;</Link> :
                 <div className={'btn btn--disabled'}>&lt;</div>}
             {page}

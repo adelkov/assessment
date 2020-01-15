@@ -23,6 +23,13 @@
   table-layout: fixed;
   width: 100%;
 
+  & tr {
+    cursor: pointer;
+    &:hover {
+      box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
+    }
+  }
+
   & tr:not(:last-child) td:not(:last-child){
     border-bottom: 1px solid $color-grey-light-2;
   }

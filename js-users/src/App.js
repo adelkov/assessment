@@ -11,18 +11,22 @@ import Add from "./views/AddUser";
 import Navigation from "./views/Navigation/Navigation";
 import Edit from "./views/EditUser";
 import {NotificationProvider} from "./Providers/Notification";
+import {ErrorBoundary} from "./components/ErrorBoundary";
 
 
 function App() {
     return (
         <Router>
+
             <NotificationProvider>
                 <Navigation/>
                 <div className="app-container">
                     <div className={'app'}>
                         <Switch>
                             <Route path={`/users/:page`}>
-                                <Users/>
+                                <ErrorBoundary>
+                                    <Users/>
+                                </ErrorBoundary>
                             </Route>
                             <Route path="/new">
                                 <Add/>

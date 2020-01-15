@@ -1,0 +1,22 @@
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+
+  &__back {
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding: 1rem;
+    border: 1px solid $color-grey-dark;
+    color: $color-grey-dark;
+    margin-top: 2rem;
+    transition: all .4s;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-grey-dark;
+    }
+  }
+}
