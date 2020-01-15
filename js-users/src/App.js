@@ -17,13 +17,12 @@ import {ErrorBoundary} from "./components/ErrorBoundary";
 function App() {
     return (
         <Router>
-
             <NotificationProvider>
                 <Navigation/>
                 <div className="app-container">
                     <div className={'app'}>
                         <Switch>
-                            <Route path={`/users/:page`}>
+                            <Route path={"/users/:page(\\d+)"}>
                                 <ErrorBoundary>
                                     <Users/>
                                 </ErrorBoundary>
@@ -31,7 +30,7 @@ function App() {
                             <Route path="/new">
                                 <Add/>
                             </Route>
-                            <Route path="/edit/:userId">
+                            <Route path={`/edit/:userId(\\d+)`}>
                                 <Edit/>
                             </Route>
                             <Redirect from={'/'} to={'/users/1'}/>
