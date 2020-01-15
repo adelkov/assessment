@@ -24,7 +24,7 @@ test('Adding user with partially empty input', async () => {
     fireEvent.change(screen.getByLabelText(/last name/i), {
         target: {value: 'potter'},
     });
-    fireEvent.click(screen.getByText(/save/i))
+    fireEvent.click(screen.getByText(/save/i));
     expect(mockAdd).toHaveBeenCalledWith({"first_name": "", "last_name": "potter", "status": "active"});
 });
 
